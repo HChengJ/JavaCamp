@@ -1,10 +1,9 @@
 package Week2.Work;
 
 
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+
+import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -15,7 +14,7 @@ public class OkHttpUtils {
     // GET 调用
     public static String getString(String url) throws IOException {
         Request request = new Request.Builder()
-                .url(url)
+                .url(url).get()
                 .build();
         Call call = client.newCall(request);
         try{
@@ -30,11 +29,9 @@ public class OkHttpUtils {
 
 
     public static void main(String[] args) throws Exception {
-
-        String url = "http://localhost:8801";
+        String url = "http://localhost:8801/";
         String text = OkHttpUtils.getString(url);
         System.out.println("url: " + url + " ; response: \n" + text);
-
         // 清理资源
         OkHttpUtils.client = null;
     }
