@@ -1,4 +1,4 @@
-package main.java.Week2.Case;
+package Week2.Case;
 
 import java.util.HashMap;
 import java.util.Map;

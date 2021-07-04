@@ -1,4 +1,4 @@
-package main.java.Week2.GCLog;
+package Week2.GCLog;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
