@@ -8,8 +8,14 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.EpollChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.sctp.nio.NioSctpServerChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
+
+import javax.net.ssl.SSLException;
+import java.security.cert.CertificateException;
 
 public class NettyHttpServer {
     public static void main(String[] args) throws InterruptedException {
@@ -27,7 +33,7 @@ public class NettyHttpServer {
                     .childOption(EpollChannelOption.SO_REUSEPORT,true)
                     .childOption(ChannelOption.SO_KEEPALIVE,true)
                     .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-            b.group(bossGroup,workerGroup).channel(NioSctpServerChannel.class)
+            b.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new HttpInitializer());
 
